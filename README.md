@@ -5,7 +5,7 @@ No fancy pancy coding and no HAL. No error checking or USB suspend, just what is
 
 Provides a simple interface to send or read a character via the USB interface.
 
-The STM32F103C8T6 (for example a bluepill board) needs to run on either 48MHz or 72MHz to be able te generate the 
+The STM32F103C8T6 (for example a bluepill board) needs to run on either 48MHz or 72MHz to be able to generate the 
 needed 48MHz for the USB device.
 
 This simple project just echo's the characters send from the host back to the host.
