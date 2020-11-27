@@ -145,6 +145,7 @@ const uint8_t StringSerial[] =
 const uint8_t vendorVersion[] = { 0x31, 0x00 };
 const uint8_t vendorAttach[]  = { 0xC3, 0x00 };
 const uint8_t vendorStatus[]  = { 0xFF, 0xEE };
+const uint8_t vendorBreak[]   = { 0x00, 0x00 };
 
 //Function for getting a character from the USB receive buffer
 int16_t usbRead(void)
@@ -432,6 +433,8 @@ void usbIrqHandler(void)
                 EP0SendData((uint16_t *)vendorAttach, sizeof(vendorAttach), SETUPPACKET->wLength);
               else if(SETUPPACKET->wValue.word == USB_CH340_READ_STATUS)
                 EP0SendData((uint16_t *)vendorStatus, sizeof(vendorStatus), SETUPPACKET->wLength);
+              else                                                                                      //Some linux drivers need a response to reading a register
+                EP0SendData((uint16_t *)vendorBreak, sizeof(vendorBreak), SETUPPACKET->wLength);        //So when not one of the two defined ones just return 0x0000
               break;
           }
         }
